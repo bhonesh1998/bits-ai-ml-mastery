@@ -1,6 +1,6 @@
 # BITS Pilani M.Tech (AI & ML) - Theory to Production Mastery
 
-Welcome to the ultimate practical implementation playground. The goal of this repository is to bridge the gap between academic theory (completed during Sem 2) and production-grade ML engineering. 
+Welcome to the ultimate practical implementation playground. The goal of this repository is to bridge the gap between academic theory and production-grade ML engineering. 
 
 This repository is structured as a curated engineering portfolio. It transitions systematically from writing foundational algorithms using pure math up to building multi-agent, production-ready AI systems.
 
