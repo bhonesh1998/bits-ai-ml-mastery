@@ -96,3 +96,69 @@ class Dense(Layer):
         # We return this so the previous layer in the network can use it as ITS output_gradient.
         # Shape check: (batch_size, output_dim) dot (output_dim, input_dim) = (batch_size, input_dim)
         return np.dot(output_gradient, self.weights.T)
+
+# For non activation features , introducing RELU and softmax 
+
+class ReLU(Layer):
+    """
+    Rectified Linear Unit (ReLU) Activation Layer.
+    This introduces non-linearity, allowing the network to learn complex patterns.
+    This is important to know why non-linearity is introduces in network.
+    Mathematical operation: f(x) = max(0, x)
+    """
+    def __init__(self):
+        super().__init__()
+        self.input_data = None
+
+    def forward(self, input_data: np.ndarray) -> np.ndarray:
+        """
+        Any negative number becomes 0. Any positive number stays the same.
+        """
+        self.input_data = input_data
+        return np.maximum(0, input_data)
+
+    def backward(self, output_gradient: np.ndarray) -> np.ndarray:
+        """
+        The derivative of ReLU is 1 if x > 0, and 0 if x <= 0.
+        By the chain rule, we just multiply the upstream gradient by this derivative.
+        """
+        relu_derivative = self.input_data > 0
+        return output_gradient * relu_derivative
+
+
+# softmax is used for probability distribution
+
+class Softmax(Layer):
+    """
+    Softmax Activation Layer.
+    Used at the very end of a classification network to convert raw scores (logits)
+    into a beautiful probability distribution that sums to 1.0.
+    """
+    def __init__(self):
+        super().__init__()
+        self.output_data = None
+
+    def forward(self, input_data: np.ndarray) -> np.ndarray:
+        """
+        Computes the exponential of each element, divided by the sum of exponentials.
+        Includes a critical numerical stability trick to prevent np.exp() from overflowing.
+        """
+
+        # Subtract the max value in each row to prevent exponent overflow
+        shifted_input = input_data - np.max(input_data, axis=1, keepdims=True)
+        
+        # Calculate exponentials and probabilities
+        exponentials = np.exp(shifted_input)
+        self.output_data = exponentials / np.sum(exponentials, axis=1, keepdims=True)
+        return self.output_data
+
+    def backward(self, output_gradient: np.ndarray) -> np.ndarray:
+        """
+        The Jacobian matrix of Softmax is complex because each output depends on ALL inputs.
+        Math: dL/dX = S * (dL/dY - sum(dL/dY * S))
+        """
+        # This is a highly vectorized, computationally efficient way to calculate 
+        # the backward pass for Softmax across a batch of data.
+        
+        dot_product_sum = np.sum(output_gradient * self.output_data, axis=1, keepdims=True)
+        return self.output_data * (output_gradient - dot_product_sum)
