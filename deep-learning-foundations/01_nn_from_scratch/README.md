@@ -42,8 +42,8 @@ Updates the network parameters using an accumulated velocity matrix to power thr
 To train the network on a synthetic non-linear spiral dataset and watch the loss optimize in real-time, execute the following command from the parent directory:
 
 
-```bash
 python -m 01_nn_from_scratch.train
+
 
 
 ## Visual Results
