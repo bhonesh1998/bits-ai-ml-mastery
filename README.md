@@ -11,7 +11,7 @@ This repository is structured as a curated engineering portfolio. It transitions
 | Module / Project Name | Difficulty | Core Tech Stack | Status |
 | :--- | :---: | :--- | :---: |
 | **[01] Deep Learning Foundations** | | | |
-| ├── Neural Networks From Scratch | Intermediate | NumPy, Python | 🔄 Planning |
+| ├── Neural Networks From Scratch | Intermediate | NumPy, Python | ✅ Completed |
 | ├── CNN Classification Pipeline | Intermediate | PyTorch, Albumentations, W&B | 🔄 Planning |
 | ├── Time Series Forecasting | Intermediate | PyTorch, TCN, Optuna | 🔄 Planning |
 | └── Transformer From Scratch | Advanced | PyTorch, RoPE, KV-Cache | 🔄 Planning |
