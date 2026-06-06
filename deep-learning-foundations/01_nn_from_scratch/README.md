@@ -35,7 +35,7 @@ Updates the network parameters using an accumulated velocity matrix to power thr
 ├── tests/
 │   └── test_gradients.py # PyTest numerical finite-difference checks
 └── train.py              # Main training loop execution
-
+```
 
 ## How to Run
 
