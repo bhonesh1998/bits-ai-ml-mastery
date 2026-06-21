@@ -52,3 +52,13 @@ Here is the network successfully learning the non-linear decision boundary of th
 
 ![Learned Decision Boundary](images/Spiral_Data_Example.png)
 ![Training Phase](images/Training_and_Accuracy.png)
+
+## 🧪 Unit Testing & Gradient Checking
+
+To ensure the custom matrix calculus is mathematically flawless, this module is strictly tested using **Pytest**. 
+
+Instead of trusting the analytical chain rule equations blindly, we use **Numerical Gradient Checking** (finite differences). This involves tweaking the weights by a tiny epsilon ($\epsilon = 1e^{-5}$) and measuring the change in loss to numerically calculate the true derivative. The tests assert that our analytical gradients and numerical gradients are identical.
+
+**Run the Test Suite:**
+```bash
+python -m pytest 01_nn_from_scratch/tests/
